@@ -1,0 +1,32 @@
+{
+  "name": "arnau.github.io",
+  "version": "1.0.0",
+  "description": "Portfolio de Arnau Granados",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy && npm run tailwind",
+    "serve": "eleventy --serve | npm run tailwind:watch",
+    "tailwind": "npx @tailwindcss/cli -i ./_includes/css/style.css -o ./_site/assets/css/style.css --minify",
+    "tailwind:watch": "npx @tailwindcss/cli -i ./_includes/css/style.css -o ./_site/assets/css/style.css --watch"
+  },
+  "keywords": [
+    "eleventy",
+    "github pages",
+    "portfolio",
+    "sitios estáticos"
+  ],
+  "author": "Arnau Granados",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "@github/relative-time-element": "^4.4.5",
+    "@tailwindcss/cli": "^4.0.14",
+    "dotenv": "^16.4.7",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "tailwindcss": "^4.0.14"
+  }
+}

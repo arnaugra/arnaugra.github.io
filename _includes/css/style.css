@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+h1 {
+    @apply text-2xl font-bold;
+}
+
+h2 {
+    @apply text-xl font-bold;
+}
+
+h3 {
+    @apply text-lg font-bold;
+}
+
+h4 {
+    @apply text-base font-bold;
+}
+
+h5 {
+    @apply text-sm font-bold;
+}
+
+h6 {
+    @apply text-xs font-bold;
+}
+
+p {
+    @apply text-base;
+}
+
+.markdown a,
+a.link {
+    @apply text-blue-600 hover:text-blue-800 visited:text-purple-600; 
+}
+
+ul {
+    @apply list-disc list-outside ml-5;
+}
+
+ol {
+    @apply list-decimal list-outside ml-5;
+}
+
+ul ul,
+ol ul {
+    @apply list-disc my-1 ml-5;
+}
+
+ul ol,
+ol ol {
+    @apply list-decimal my-1 ml-5;
+}
+
+ul ul ul,
+ol ul ul,
+ul ol ul,
+ol ol ul {
+    @apply list-disc my-1 ml-5;
+}
+
+ul li,
+ol li {
+    @apply ml-2; /* Agrega un poco de margen a los elementos de la lista */
+}
+
+ul li ul,
+ol li ul {
+    @apply ml-5; /* Aplica margen a las listas anidadas */
+}
+
+ul li ol,
+ol li ol {
+    @apply ml-5; /* Aplica margen a las listas ordenadas anidadas */
+}
+
+blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic;
+}
+
+code {
+    @apply font-mono bg-gray-100 p-1;
+}
+
+pre {
+    @apply font-mono bg-gray-100 p-4;
+}
+
+img {
+    @apply mx-auto;
+}
+.markdown img {
+    @apply mx-auto max-w-sm max-h-[220px];
+}
+
+table {
+    @apply w-full border-collapse;
+}
+
+th, td {
+    @apply border border-gray-300 p-2;
+}
+
+th {
+    @apply bg-gray-100;
+}
+
+tr:nth-child(even) {
+    @apply bg-gray-100;
+}
+
+tr:hover {
+    @apply bg-gray-200;
+}
+
+hr {
+    @apply border-t border-gray-300 my-4;
+}
+
+.markdown hr {
+    @apply w-10/12 lg:w-11/12 xl:w-11/12 mx-auto;
+}
+

@@ -1,0 +1,53 @@
+---
+layout: layout
+eleventyComputed:
+  title: "{{ settings.siteName }}"
+pagination:
+  data: posts.posts
+  alias: posts
+  size: 10
+  generatePageOnEmptyData: true
+permalink: "{% if pagination.pageNumber == 0 or posts.length == 0 %}/{% else %}page-{{ pagination.pageNumber }}/{% endif %}"
+---
+
+<p class="text-balance">{{ settings.blogDescription }}</p>
+
+<section class="flex flex-col gap-4 my-8">
+  {% if posts and posts.length > 0 %}
+    {% for post in posts %}
+    <article>
+      <div class="flex gap-4 items-center">
+        <a href="/post/{{ post.uuid }}" class="link"
+        >
+        <!-- class="text-blue-900 hover:text-blue-700 visited:text-purple-900" -->
+          <h3>{{ post.title }}</h3>
+        </a>
+        {% include '_layouts/_components/post-relative-time.liquid' %}
+      </div>
+      <p class="line-clamp-2">{{ post.content }}</p>
+    </article>
+    {% endfor %}
+  {% else %}
+    <p class="text-gray-400 italic">No hay publicaciones aún.</p>
+  {% endif %}
+</section>
+
+{% if pagination.href.previous or pagination.href.next %}
+<div class="flex justify-between gap-4">
+
+  <a
+    class="{% if pagination.href.previous == null %}pointer-events-none text-gray-400 !bg-transparent{% endif %} text-center py-1 w-full md:w-30 bg-slate-200 rounded-xs"
+    href="{% if pagination.href.previous != null %}{{ pagination.href.previous }}{% endif %}"
+  >
+    Anterior
+  </a>
+
+  <a
+    class="{% if pagination.href.next == null %}pointer-events-none text-gray-400 !bg-transparent{% endif %} text-center py-1 w-full md:w-30 bg-slate-200 rounded-xs"
+    href="{% if pagination.href.next != null %}{{ pagination.href.next }}{% endif %}"
+  >
+    Siguiente
+  </a>
+
+</div>
+{% endif %}

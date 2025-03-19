@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+</head>
+
+<body class="w-9/10 lg:w-7/10 xl:w-2/4 mx-auto grid min-h-dvh grid-rows-[auto_1fr_auto] *:px-4">
+
+    {% include '_layouts/_components/header.liquid' %}
+    
+    <main>
+        {{ content }}
+    </main>
+    
+    {% include '_layouts/_components/footer.liquid' %}
+
+    <!-- @github/relative-time-element -->
+    <script type="module" src="/assets/js/relative-time/relative-time-element.js"></script>
+    <!-- highlight.js <code pre> -->
+    <script type="module" src="/assets/js/highlight.js"></script>
+    <!-- header-scroll.js -->
+    <script type="module" src="/assets/js/header-scroll.js"></script>
+
+</body>
+
+</html>
