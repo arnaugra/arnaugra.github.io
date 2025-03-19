@@ -1,6 +1,6 @@
-// import dotenv
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv if you are not using github pages
+// import dotenv from "dotenv";
+// dotenv.config();
 
 export default {
     siteName: process.env.SITE_NAME || "My Tech {log}",
