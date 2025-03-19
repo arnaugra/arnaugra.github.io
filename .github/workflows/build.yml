@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SITE_NAME: ${{ env.SITE_NAME }}
-      SITE_LANG: ${{ env.SITE_LANG }}
-      BLOG_DESCRIPTION: ${{ env.BLOG_DESCRIPTION }}
-      TIMEZONE: ${{ env.TIMEZONE }}
+      SITE_NAME: $SITE_NAME
+      SITE_LANG: $SITE_LANG
+      BLOG_DESCRIPTION: $BLOG_DESCRIPTION
+      TIMEZONE: $TIMEZONE
 
     steps:
       - uses: actions/checkout@v3
