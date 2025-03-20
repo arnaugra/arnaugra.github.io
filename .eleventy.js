@@ -27,6 +27,7 @@ export default function (eleventyConfig) {
   // exports
   eleventyConfig.addPassthroughCopy({
     'node_modules/@github/relative-time-element/dist/bundle.js': 'assets/js/relative-time/relative-time-element.js',
+    '_includes/_data/og.png': 'public/img/og.png',
     '_includes/js': 'assets/js',
     '_includes/img': 'assets/img',
     // '_includes/css': 'assets/css',
