@@ -10,7 +10,7 @@ pagination:
 permalink: "{% if pagination.pageNumber == 0 or posts.length == 0 %}/{% else %}page-{{ pagination.pageNumber }}/{% endif %}"
 ---
 
-<p class="text-balance">{{ settings.blogDescription }}</p>
+<p class="text-pretty">{{ settings.blogDescription }}</p>
 
 <section class="flex flex-col gap-4 my-8">
   {% if posts and posts.length > 0 %}
