@@ -1,7 +1,7 @@
 export default {
     // site data
     siteName: "arnau.log",
-    blogDescription: "Blog personal del día a día de un desarrollador web. Dentro y fuera del entrono profesional.",
+    blogDescription: "Blog personal sobre la vida de un desarrollador web, dentro y fuera del entrono profesional.",
     
     // site settings
     siteLang: "es",
