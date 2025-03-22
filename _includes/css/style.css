@@ -88,8 +88,8 @@ pre {
 img {
     @apply mx-auto;
 }
-.markdown img {
-    @apply mx-auto max-w-sm max-h-[220px];
+.markdown p img {
+    @apply mx-auto max-h-[500px];
 }
 
 table {
