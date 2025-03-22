@@ -16,7 +16,7 @@ permalink: "{% if pagination.pageNumber == 0 or posts.length == 0 %}/{% else %}p
   {% if posts and posts.length > 0 %}
     {% for post in posts %}
     <article>
-      <div class="flex gap-4 items-center">
+      <div class="flex flex-col sm:flex-row sm:gap-4 sm:items-center">
         <a href="/post/{{ post.uuid }}" class="link"
         >
         <!-- class="text-blue-900 hover:text-blue-700 visited:text-purple-900" -->
