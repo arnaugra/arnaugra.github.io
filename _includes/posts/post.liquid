@@ -1,6 +1,7 @@
 ---
 layout: layout
-title: "Post"
+eleventyComputed:
+  title: "{{ settings.siteName | append: ' - ' | append: post.title }}"
 pagination:
     data: posts.posts
     size: 1
