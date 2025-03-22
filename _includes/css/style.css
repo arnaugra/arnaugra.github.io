@@ -82,7 +82,7 @@ code {
 }
 
 pre {
-    @apply font-mono bg-gray-100 p-4;
+    @apply font-mono bg-gray-100 p-4 text-wrap;
 }
 
 img {
