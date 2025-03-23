@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Google Meta tags -->
+    <meta name="description" content="Necesito un WebWorker en mi vida">
+<meta name="keywords" content="tecnología, programación, blog">
+<meta name="author" content="Arnau Granados">
+    <!-- Open Graph Meta tags -->
+    <meta property="og:url" content="https://arnaugra.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="arnau.log">
+<meta property="og:description" content="Necesito un WebWorker en mi vida">
+<meta property="og:image" content="">
+    <!-- Twitter Meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="arnaugra.github.io/">
+<meta property="twitter:url" content="https://arnaugra.github.io/">
+<meta name="twitter:title" content="arnau.log">
+<meta name="twitter:description" content="Necesito un WebWorker en mi vida">
+<meta name="twitter:image" content="">
+
+    <title>arnau.log - Necesito un WebWorker en mi vida</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+</head>
+
+<body class="w-9/10 lg:w-7/10 xl:w-2/4 mx-auto grid min-h-dvh grid-rows-[auto_1fr_auto] *:px-4">
+
+    <header class="flex items-center justify-between h-12  sticky top-0 z-9
+after:absolute after:-bottom-10 after:top-0 after:left-0 after:w-full after:z-9
+after:bg-gradient-to-b after:from-white after:from-55% after:to-transparent after:to-100% after:transition-all after:duration-500 after:!bottom-0">
+    <h1 class="z-10">
+        <a href="/">arnau.log</a>
+    </h1>
+</header>
+    
+    <main>
+        
+<!-- variables to create in-post pagination -->
+
+
+
+
+<h2>Necesito un WebWorker en mi vida</h2>
+
+<relative-time datetime="2025-03-22T22:55:28+00:00" tense="past" format="relative" lang="es"></relative-time>
+
+<hr>
+
+<div class="flex flex-col gap-4 markdown max-w-full overflow-wrap">
+  <p>Cuando desarrollamos, los <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> nos permiten ejecutar tareas en segundo plano sin bloquear la interfaz del usuario, ya que tenemos varios hilos de ejecución. ¿No sería genial tener algo así en la vida?</p>
+<p><img src="/assets/img/WebWorkers.webp" alt="WebWorkerss"></p>
+<h2>Un WebWorker en la vida cotidiana</h2>
+<p>Imagina que tienes que <strong>hacer la compra</strong>, pero también quieres avanzar con tu proyecto personal. Si fueras JavaScript sin usar WebWorkers, tendrías que:</p>
+<ol>
+<li>Ir al supermercado.</li>
+<li>Comprar los productos.</li>
+<li>Volver a casa.</li>
+<li>Volver con tu proyecto.</li>
+</ol>
+<p>Todo esto bloquea tu flujo de trabajo. En cambio, con un WebWorker en la vida real (por ejemplo, haciendo un pedido online o delegándolo a alguien), podrías:</p>
+<ol>
+<li>Encargar la compra online. <em>(WebWorker activado)</em></li>
+<li>Seguir programando mientras la compra se procesa en segundo plano.</li>
+<li>Recibir los productos sin haber perdido tiempo valioso.</li>
+</ol>
+<p><img src="/assets/img/WebWorkersScheme.webp" alt="Esquema de funcionamiento de los WebWorkers en el proccesador"></p>
+<h2>Cómo funciona un WebWorker (en JavaScript)</h2>
+<p>En nuestro hilo principal (<code>main thread</code>), invocamos un WebWorker con el archivo que contiene el código a ejecutar en segundo plano, el cual se ejecutará en un hilo separado, aprovechando otro núcleo del procesador si está disponible.</p>
+<p>Luego, enviamos datos al WebWorker con <code>postMessage()</code>.</p>
+<p>El WebWorker recibe los datos con <code>self.onmessage</code> y envía el resultado con <code>postMessage()</code>.</p>
+<p>Finalmente, en el flujo principal, recibimos el resultado con el método <code>onmessage()</code> de la instancia del WebWorker.</p>
+<pre><code class="language-js"><span class="hljs-comment">// main.js</span>
+<span class="hljs-keyword">const</span> worker = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Worker</span>(<span class="hljs-string">&quot;worker.js&quot;</span>);
+
+<span class="hljs-comment">// Enviamos la tarea al WebWorker</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Encargando la compra...&quot;</span>);
+worker.<span class="hljs-title function_">postMessage</span>({ <span class="hljs-attr">lista_compra</span>: [<span class="hljs-string">&quot;pan&quot;</span>, <span class="hljs-string">&quot;leche&quot;</span>, <span class="hljs-string">&quot;huevos&quot;</span>, <span class="hljs-string">&quot;frutas&quot;</span>] });
+
+<span class="hljs-comment">// Mientras la compra se procesa, seguimos con nuestro proyecto</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Programando mientras la compra se realiza...&quot;</span>);
+
+worker.<span class="hljs-property">onmessage</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Compra recibida: &quot;</span>, event.<span class="hljs-property">data</span>);
+};
+</code></pre>
+<pre><code class="language-js"><span class="hljs-comment">// worker.js</span>
+self.<span class="hljs-property">onmessage</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Recibida la lista de la compra: &quot;</span>, event.<span class="hljs-property">data</span>.<span class="hljs-property">lista_compra</span>);
+    
+    <span class="hljs-comment">// Simulamos el proceso de compra con un retraso</span>
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">const</span> compra = {
+          <span class="hljs-attr">productos</span>: event.<span class="hljs-property">data</span>.<span class="hljs-property">lista_compra</span>,
+          <span class="hljs-attr">estado</span>: <span class="hljs-string">&quot;Compra completada&quot;</span>
+        };
+        <span class="hljs-title function_">postMessage</span>(compra);
+    }, <span class="hljs-number">3000</span>);
+};
+</code></pre>
+<blockquote>
+<p>Normalmente, realizaríamos una operación pesada, ya que pudiese bloquear la aplicación si se ejecutara en el hilo principal.</p>
+</blockquote>
+<h2>Casos de uso frecuentes</h2>
+<p>Los WebWorkers son ideales para tareas que requieren mucho procesamiento y pueden bloquear el hilo principal del navegador, como:</p>
+<ul>
+<li>Procesamiento de imágenes o videos.</li>
+<li>Cálculos matemáticos complejos.</li>
+<li>Manejo de grandes volúmenes de datos (análisis de archivos JSON, CSV, XML…).</li>
+<li>Operaciones criptográficas, como encriptación o hashing.</li>
+<li>Petición de datos a un servidor.</li>
+</ul>
+<p>Por ejemplo, en una aplicación de edición de imágenes, un WebWorker puede encargarse de aplicar filtros o ajustes sin que la interfaz del usuario se congele.</p>
+<p>Al igual que en la programación, en la vida real utilizamos herramientas, dispositivos y automatizaciones que nos permiten delegar tareas y optimizar nuestro tiempo. Estas soluciones nos ayudan a centrarnos en lo verdaderamente importante, evitando distracciones y tareas repetitivas, lo que nos hace más eficientes en nuestro día a día. De esta manera, podemos contar con nuestros propios “WebWorkers” en la vida cotidiana, como:</p>
+<ul>
+<li><strong>Limpieza del hogar</strong>: Un robot aspirador, mientras tú haces algo más valioso, este limpia el suelo por ti.</li>
+<li><strong>Trámites administrativos</strong>: Un asistente automatizado o un servicio online, el cual te permite ahorrar tiempo y evitar largas filas.</li>
+<li><strong>Cocinar</strong>: Una olla programable para preparar la comida mientras haces otras cosas.</li>
+</ul>
+<p>Estos ejemplos muestran cómo la delegación de tareas, ya no solo en programación, sino en la vida diaria, nos ayuda a ser más productivos y eficientes.</p>
+
+</div>
+
+<hr>
+
+
+
+
+    </main>
+    
+    <!-- <footer class="flex items-center justify-center h-12">
+
+    <nav class="flex items-center space-x-4">
+        <a href="/about" class="text-blue-500">About</a>
+        <a href="/contact" class="text-blue-500">Contact</a>
+    </nav>
+
+</footer> -->
+
+    <!-- @github/relative-time-element -->
+    <script type="module" src="/assets/js/relative-time/relative-time-element.js"></script>
+    <!-- highlight.js <code pre> -->
+    <script type="module" src="/assets/js/highlight.js"></script>
+    <!-- header-scroll.js -->
+    <script type="module" src="/assets/js/header-scroll.js"></script>
+
+</body>
+
+</html>
