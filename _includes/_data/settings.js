@@ -11,6 +11,6 @@ export default {
     siteDomain: "arnaugra.github.io/",
     siteKeywords: "blog, desarrollo web, programación",
     siteUrl: "https://arnaugra.github.io/",
-    siteOgImage: "https://arnaugra.github.io/img/og.png",
+    siteOgImage: "https://arnaugra.github.io/public/img/og.png",
     siteType: "website",
 };
