@@ -1,0 +1,6 @@
+Arnau Granados :
+    11ty
+    Tailwind
+    GitHub Pages
+    GitHub Actions
+    bash scripts
