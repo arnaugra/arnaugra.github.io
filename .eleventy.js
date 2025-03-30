@@ -30,6 +30,7 @@ export default function (eleventyConfig) {
     '_includes/_data/og.png': 'public/img/og.png',
     '_includes/js': 'assets/js',
     '_includes/img': 'assets/img',
+    '_includes/humans.txt': 'humans.txt',
     // '_includes/css': 'assets/css',
   });
 
