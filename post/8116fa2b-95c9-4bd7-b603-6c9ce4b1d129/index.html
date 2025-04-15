@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Google Meta tags -->
+    <meta name="description" content="¿Hacer, o pedir un sandwich?">
+<meta name="keywords" content="tecnología, programación, blog">
+<meta name="author" content="Arnau Granados">
+    <!-- Open Graph Meta tags -->
+    <meta property="og:url" content="https://arnaugra.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="arnau.log">
+<meta property="og:description" content="¿Hacer, o pedir un sandwich?">
+<meta property="og:image" content="https://arnaugra.github.io/public/img/og.png">
+    <!-- Twitter Meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="arnaugra.github.io/">
+<meta property="twitter:url" content="https://arnaugra.github.io/">
+<meta name="twitter:title" content="arnau.log">
+<meta name="twitter:description" content="¿Hacer, o pedir un sandwich?">
+<meta name="twitter:image" content="https://arnaugra.github.io/public/img/og.png">
+
+    <title>arnau.log - ¿Hacer, o pedir un sandwich?</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+</head>
+
+<body class="w-9/10 lg:w-7/10 xl:w-2/4 mx-auto grid min-h-dvh grid-rows-[auto_1fr_auto] *:px-4">
+
+    <header class="flex items-center justify-between h-12  sticky top-0 z-9
+after:absolute after:-bottom-10 after:top-0 after:left-0 after:w-full after:z-9
+after:bg-gradient-to-b after:from-white after:from-55% after:to-transparent after:to-100% after:transition-all after:duration-500 after:!bottom-0">
+    <h1 class="z-10">
+        <a href="/">arnau.log</a>
+    </h1>
+</header>
+    
+    <main>
+        
+<!-- variables to create in-post pagination -->
+
+
+
+  
+  
+  
+    
+  
+    
+      
+    
+  
+    
+  
+
+
+<h2>¿Hacer, o pedir un sandwich?</h2>
+
+<relative-time datetime="2025-04-15T20:30:23+00:00" tense="past" format="relative" lang="es"></relative-time>
+
+<hr>
+
+<div class="flex flex-col gap-4 markdown max-w-full overflow-wrap">
+  <p>Hace unos días visité a un amigo y, cenando, acabamos hablando de trabajo (como siempre), y acabamos leyendo algunos subreddits, encontramos uno donde alguien pedía ayuda para optimizar unos endpoints de una API.</p>
+<p>Contaba que pasó a usar <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template literals</a> con las variables necesarias para cambiar los valores en la query y las <a href="https://www.ibm.com/docs/en/informix-servers/12.10.0?topic=expressions-case">CASE EXPRESSIONS</a> para las condiciones en vez de aplicar un montón de ifs en la aplicación para concatenar strings como él se encontró. Luego necesitaba modificar algunos valores, así que recorría todos los campos y cambiaba solo los necesarios.</p>
+<p>Con el código que había en la publicación, pudimos ver claro cuáles eran sus problemas de rendimiento:</p>
+<ol>
+<li><strong>No paginar realmente</strong>, ya que obtenía todos los valores (aún teniendo parámetros en la función para ello) y solo al iterar la respuesta obtenía los que estaban dentro de su rango deseado. (voy a dejar este concepto a un lado en este caso 😅)</li>
+<li><strong>Usar programación declarativa</strong> para iterar la respuesta.</li>
+</ol>
+<p>No está mal, existe por una razón, y suele ser más rápido de escribir e incluso más legible. Pero con grandes volúmenes de datos, como parecía ser ese caso.</p>
+<h2>¿Qué es la programación imperativa?</h2>
+<p>La programación imperativa es indicar paso a paso qué ha de hacer el código. Tú <strong>controlas</strong> el proceso y el flujo de ejecución depende 100% de tus instrucciones.</p>
+<p>Es como seguir una receta. Para obtener un sándwich, has de seguir unos pasos en un orden para obtener un resultado.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> pedidos = [
+  [<span class="hljs-string">&quot;jamón&quot;</span>, <span class="hljs-string">&quot;queso&quot;</span>],
+  [<span class="hljs-string">&quot;lechuga&quot;</span>, <span class="hljs-string">&quot;huevo&quot;</span>],
+  [<span class="hljs-string">&quot;tomate&quot;</span>, <span class="hljs-string">&quot;atún&quot;</span>]
+];
+
+<span class="hljs-keyword">const</span> sandwiches = [];
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; pedidos.<span class="hljs-property">length</span>; i++) {
+  <span class="hljs-keyword">const</span> ingredientes = pedidos[i];
+  <span class="hljs-keyword">const</span> texto = <span class="hljs-string">`Sándwich con <span class="hljs-subst">${ingredientes.join(<span class="hljs-string">&quot; y &quot;</span>)}</span>`</span>;
+  sandwiches.<span class="hljs-title function_">push</span>(texto);
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sandwiches);
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &quot;Sándwich con jamón y queso&quot;,</span>
+<span class="hljs-comment">//   &quot;Sándwich con lechuga y huevo&quot;,</span>
+<span class="hljs-comment">//   &quot;Sándwich con tomate y atún&quot;</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<p>De este modo, tú controlas totalmente la ejecución, y sabes en todo momento qué es lo que hace el código y puedes modificarlo a tu gusto.</p>
+<p>Puede ser más verboso, o difícil de mantener a largo plazo, sobre todo en procesos complejos, pero es la mayor aproximación a programar con órdenes directas a una máquina.</p>
+<h2>¿Qué es la programación declarativa?</h2>
+<p>La programación declarativa es todo lo contrario. En lugar de decirle al programa <strong>cómo</strong> hacer algo, simplemente le dices <strong>qué quieres que haga</strong>, y dejas que se encargue del “cómo”.</p>
+<p>Siguiendo con el ejemplo del sándwich, no das instrucciones paso a paso. Simplemente haces un pedido, como si estuvieras en un bar.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> pedidos = [
+  [<span class="hljs-string">&quot;jamón&quot;</span>, <span class="hljs-string">&quot;queso&quot;</span>],
+  [<span class="hljs-string">&quot;lechuga&quot;</span>, <span class="hljs-string">&quot;huevo&quot;</span>],
+  [<span class="hljs-string">&quot;tomate&quot;</span>, <span class="hljs-string">&quot;atún&quot;</span>]
+];
+
+<span class="hljs-keyword">const</span> sandwiches = pedidos.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">ingredientes</span> =&gt;</span> 
+  <span class="hljs-string">`Sándwich con <span class="hljs-subst">${ingredientes.join(<span class="hljs-string">&quot; y &quot;</span>)}</span>`</span>
+);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sandwiches);
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//   &quot;Sándwich con jamón y queso&quot;,</span>
+<span class="hljs-comment">//   &quot;Sándwich con lechuga y huevo&quot;,</span>
+<span class="hljs-comment">//   &quot;Sándwich con tomate y atún&quot;</span>
+<span class="hljs-comment">// ]</span>
+</code></pre>
+<p>Aquí no importa tanto el proceso, lo importante es que el resultado cumpla con lo que tú has pedido: <strong>quieres un sándwich</strong> con ciertos ingredientes.</p>
+<p>En JavaScript usamos este enfoque todo el tiempo con métodos como <code>.map()</code>, <code>.filter()</code>, <code>.reduce()</code>, etc…</p>
+<h2>Rendimiento</h2>
+<p>Al trabajar con pocos datos, para el usuario es imperceptible cuál es más rápido, pero hablando de eficiencia, el estilo imperativo es claramente superior.</p>
+<p>Hay sitios como <a href="https://perf.link">perf.link</a> en los que podemos comparar la eficiencia en varios trozos de código con unos valores globales.</p>
+<p>En este ejemplo, creo un array global con 1000 posiciones, y en los dos casos busco el valor 200, en el primer caso con imperativo, y en el segundo con declarativo usando <code>.find()</code>.</p>
+<p><img src="/assets/img/ImperativoVsDeclarativo.webp" alt="Comparación rendimiento imperativo vs declarativo"></p>
+<p>Podemos ver que en el primer caso, realizamos <strong>+2M</strong> de operaciones por segundo, y en el segundo solo <strong>120K</strong>.</p>
+<p>Al final, los métodos como <code>.map()</code>, <code>.filter()</code> o <code>.find()</code>, son cómodos, rápidos de usar, y muy eficientes si no esperamos trabajar con grandes cantidades de datos, o para crear un <em>MVP</em>. Escribe el código pensando en que tú mismo volverás a él dentro de un mes. Debe ser claro tanto para ti como para cualquier compañero de equipo, y sobre todo, saber cuándo y por qué conviene usar cada estilo en cada caso.</p>
+
+</div>
+
+<hr>
+
+
+
+<div class="flex">
+  
+  
+  <a
+    class="link ml-auto"
+    href="/post/50693c37-5e73-4cbc-8438-e14e2bfaaf5c"
+  >
+    Mamá, no soy informático »
+  </a>
+  
+</div>
+
+
+    </main>
+    
+    <!-- <footer class="flex items-center justify-center h-12">
+
+    <nav class="flex items-center space-x-4">
+        <a href="/about" class="text-blue-500">About</a>
+        <a href="/contact" class="text-blue-500">Contact</a>
+    </nav>
+
+</footer> -->
+
+    <!-- @github/relative-time-element -->
+    <script type="module" src="/assets/js/relative-time/relative-time-element.js"></script>
+    <!-- highlight.js <code pre> -->
+    <script type="module" src="/assets/js/highlight.js"></script>
+    <!-- header-scroll.js -->
+    <script type="module" src="/assets/js/header-scroll.js"></script>
+
+</body>
+
+</html>
