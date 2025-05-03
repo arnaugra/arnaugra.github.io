@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Google Meta tags -->
+    <meta name="description" content="Un poco de orden en mis cosas">
+<meta name="keywords" content="tecnología, programación, blog">
+<meta name="author" content="Arnau Granados">
+    <!-- Open Graph Meta tags -->
+    <meta property="og:url" content="https://arnaugra.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="arnau.log">
+<meta property="og:description" content="Un poco de orden en mis cosas">
+<meta property="og:image" content="https://arnaugra.github.io/public/img/og.png">
+    <!-- Twitter Meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="arnaugra.github.io/">
+<meta property="twitter:url" content="https://arnaugra.github.io/">
+<meta name="twitter:title" content="arnau.log">
+<meta name="twitter:description" content="Un poco de orden en mis cosas">
+<meta name="twitter:image" content="https://arnaugra.github.io/public/img/og.png">
+
+    <title>arnau.log - Un poco de orden en mis cosas</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+</head>
+
+<body class="w-9/10 lg:w-7/10 xl:w-2/4 mx-auto grid min-h-dvh grid-rows-[auto_1fr_auto] *:px-4">
+
+    <header class="flex items-center justify-between h-12  sticky top-0 z-9
+after:absolute after:-bottom-10 after:top-0 after:left-0 after:w-full after:z-9
+after:bg-gradient-to-b after:from-white after:from-55% after:to-transparent after:to-100% after:transition-all after:duration-500 after:!bottom-0">
+    <h1 class="z-10">
+        <a href="/">arnau.log</a>
+    </h1>
+</header>
+    
+    <main>
+        
+<!-- variables to create in-post pagination -->
+
+
+
+  
+  
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+
+
+<h2>Un poco de orden en mis cosas</h2>
+
+<relative-time datetime="2025-05-03T15:19:36+00:00" tense="past" format="relative" lang="es"></relative-time>
+
+<hr>
+
+<div class="flex flex-col gap-4 markdown max-w-full overflow-wrap">
+  <p>Soy de esas personas que guarda de todo en la cartera: tickets, notas, recuerdos… Me gusta tenerlo todo a mano. Incluso teniendo la tarjeta en el móvil, sigo llevándola en físico, no me gusta depender 100% del teléfono. ¿Y si me quedo sin batería?</p>
+<p>Recuerdo que, <strong>cuando descubrí que los navegadores podían guardar información de forma persistente</strong>, incluso más allá de una sola pestaña, me fascinó. Había uno que, además, funcionaba de una manera muy similar a una base de datos no relacional (NoSQL). Tenía que investigar más a fondo. Así que me lancé a crear un CRUD básico para guardar notas: una sola store, texto plano y funcionando. Me encantó la idea.</p>
+<p>A partir de ahí acabé desarrollando <strong>My Diary</strong>, un diario personal que almacenaba lo que escribías en el mismo navegador. Le añadí un <em>sistema de traducciones</em>, de <em>copias de seguridad</em> y un <em>diseño responsive</em>. Me entusiasmó tanto la idea de desarrollar algo propio con un objetivo, que incluso pensé en llevarlo al ámbito profesional, como herramienta para psicólogos o centros médicos que quisieran usar diarios para el seguimiento de pacientes, pero finalmente se quedó en conocimiento y experiencia. 🙂</p>
+<p>Hoy, cuando reviso ese código, me pasa eso de “<em>¿Quién ha programado esto?</em>”. Pero tampoco me avergüenzo, todos empezamos por algo, es parte del proceso de aprendizaje.</p>
+<blockquote>
+<p>A programar se aprende programando.</p>
+</blockquote>
+<p><img src="/assets/img/MyDiary.webp" alt="Logo My Diary!"></p>
+<p>Recientemente me he encontrado con un problema: tengo algunos <em>side projects</em>, y los accesos, tokens y datos de cada uno están dispersos en diferentes sitios. Algunos los tengo apuntados, otros no. Algunos proyectos están hosteados aquí, otros allá… Y casi que exclusivamente trabajo en ellos desde mi ordenador de sobremesa, y pensé: “¿por qué no montarme un vault con <em>IndexedDB</em> para guardar todas estas cosas en el ordenador en el que trabajo?”</p>
+<p><a href="https://indexedvault.arnaugra.eu/"><br>
+<img src="/assets/img/IndexedVault.webp" alt="Vista de IndexedVault"><br>
+</a></p>
+<p>Sé que ya existen herramientas que resuelven esto y que funcionan online, accesibles desde cualquier dispositivo. Pero esta idea me ha servido como excusa perfecta para ponerme a desarrollar algo con algunas tecnologías que quería tener más por la mano:</p>
+<ul>
+<li><strong>React</strong></li>
+<li><strong>TypeScript</strong></li>
+<li><strong>Zustand</strong></li>
+<li><a href="https://dexie.org/"><strong>Dexie</strong></a></li>
+<li><a href="https://daisyui.com/"><strong>DaisyUI</strong></a> (librería de componentes sobre Tailwind)</li>
+</ul>
+
+</div>
+
+<hr>
+
+
+
+<div class="flex">
+  
+  
+  <a
+    class="link ml-auto"
+    href="/post/8116fa2b-95c9-4bd7-b603-6c9ce4b1d129"
+  >
+    ¿Hacer, o pedir un sandwich? »
+  </a>
+  
+</div>
+
+
+    </main>
+    
+    <!-- <footer class="flex items-center justify-center h-12">
+
+    <nav class="flex items-center space-x-4">
+        <a href="/about" class="text-blue-500">About</a>
+        <a href="/contact" class="text-blue-500">Contact</a>
+    </nav>
+
+</footer> -->
+
+    <!-- @github/relative-time-element -->
+    <script type="module" src="/assets/js/relative-time/relative-time-element.js"></script>
+    <!-- highlight.js <code pre> -->
+    <script type="module" src="/assets/js/highlight.js"></script>
+    <!-- header-scroll.js -->
+    <script type="module" src="/assets/js/header-scroll.js"></script>
+
+</body>
+
+</html>
